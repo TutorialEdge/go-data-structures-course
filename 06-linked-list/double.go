@@ -2,23 +2,24 @@ package main
 
 import "fmt"
 
-// LinkedList
-type LinkedList struct {
-	Head *Node
-	Tail *Node
+// DoublyLinkedList
+type DoublyLinkedList struct {
+	Head *DoubleNode
+	Tail *DoubleNode
 	Size int
 }
 
-// Node
-type Node struct {
-	Next  *Node
-	Prev  *Node
+// DoubleNode
+type DoubleNode struct {
+	Next  *DoubleNode
+	Prev  *DoubleNode
 	Value string
 }
 
-func (l *LinkedList) Insert(elem string) {
-	node := Node{
+func (l *DoublyLinkedList) Insert(elem string) {
+	node := DoubleNode{
 		Next:  l.Head,
+		Prev:  nil,
 		Value: elem,
 	}
 	l.Head = &node
@@ -26,12 +27,12 @@ func (l *LinkedList) Insert(elem string) {
 	l.Size++
 }
 
-func (l *LinkedList) DeleteFirst() {
+func (l *DoublyLinkedList) DeleteFirst() {
 	l.Head = l.Head.Next
 	l.Size--
 }
 
-func (l *LinkedList) List() {
+func (l *DoublyLinkedList) List() {
 	current := l.Head
 	for current != nil {
 		fmt.Println("%+v\n", current)
@@ -39,7 +40,7 @@ func (l *LinkedList) List() {
 	}
 }
 
-func (l *LinkedList) Search(elem string) *Node {
+func (l *DoublyLinkedList) Search(elem string) *DoubleNode {
 	current := l.Head
 	for current != nil {
 		if current.Value == elem {
@@ -50,7 +51,7 @@ func (l *LinkedList) Search(elem string) *Node {
 	return nil
 }
 
-func (l *LinkedList) Delete(elem string) {
+func (l *DoublyLinkedList) Delete(elem string) {
 	previous := l.Head
 	current := l.Head
 	for current != nil {
